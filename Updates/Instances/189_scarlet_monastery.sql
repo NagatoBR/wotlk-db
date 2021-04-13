@@ -138,7 +138,7 @@ REPLACE INTO `creature_template_addon` (`entry`, `mount`, `bytes1`, `b2_0_sheath
 (4306, 0, 0, 1, 16, 0, 0, '9276'), -- Scarlet Torturer
 (4308, 0, 0, 1, 16, 0, 0, NULL), -- Unfettered Spirit
 (4540, 0, 0, 1, 16, 0, 0, '8876'), -- Scarlet Monk
-(4542, 0, 7, 1, 16, 0, 0, NULL), -- High Inquisitor Fairbanks
+(4542, 0, 0, 1, 16, 0, 0, NULL), -- High Inquisitor Fairbanks
 (4543, 0, 0, 1, 16, 0, 0, NULL), -- Bloodmage Thalnos
 (6426, 0, 0, 1, 16, 0, 0, NULL), -- Anguished Dead
 (6427, 0, 0, 1, 16, 0, 0, NULL), -- Haunting Phantasm
@@ -498,8 +498,10 @@ INSERT INTO `creature` (`guid`, `id`, `map`, `position_x`, `position_y`, `positi
 (@CGUID+341, 4293, 189, 1805.176, 1167.855, 6.820, 0.162434, 7200, 7200, 0, 0, 0, 0), -- Scarlet Scryer
 (@CGUID+342, 4293, 189, 1782.416, 1118.755, 7.490, 5.97183, 7200, 7200, 0, 0, 0, 0), -- Scarlet Scryer
 (@CGUID+343, 4293, 189, 1759.67, 1146.85, 7.49036, 3.19674, 7200, 7200, 0, 0, 0, 0), -- Scarlet Scryer
-(@CGUID+344, 4293, 189, 1788.68, 1145.46, 7.49084, 6.10664, 7200, 7200, 0, 0, 0, 0); -- Scarlet Scryer
+(@CGUID+344, 4293, 189, 1788.68, 1145.46, 7.49084, 6.10664, 7200, 7200, 0, 0, 0, 0), -- Scarlet Scryer
 
+-- TBC+ only
+(@CGUID+401, 23758, 189, 1767.034, 1348.685, 17.542156, 6.267, 7200, 7200, 0, 0, 0, 0); -- Headless Horseman - Earth Explosion Bunny - extrapolated sniff pos from cata+ SM
 
 -- ===========
 -- GAMEOBJECTS

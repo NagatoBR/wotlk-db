@@ -4,9 +4,7 @@ DBScriptName: instance_shadow_labyrinth
 DB%Complete: 81
 DBComment:
 * Murmur Suppression Blast 33332 - Only RP Event, not used on targets which fight players - UPDATE `spell_template` SET `AttributesEx` = `AttributesEx`|256 WHERE `Id` = 33332; doesnt work
-* npcs in murmur pre bossfight event need movement for proper positioning
-* Murmur Hallway Door should open on proximity of players towards it, dbscripts_on_go_template_use doesnt activate when door is opened with DoUseDoorOrButton();
-* 184940 and 184941 are probably pooled
+* 184940 and 184941 are probably pooled in sections of the dungeon
 EndDBScriptData */
 
 SET @CGUID := 5550000; -- creatures
@@ -536,93 +534,93 @@ REPLACE INTO `creature_template_addon` (`entry`, `mount`, `bytes1`, `b2_0_sheath
 (21159, 0, 0, 1, 0, 0, 0, NULL); -- Containment Beam
 
 INSERT INTO `creature_linking` (`guid`, `master_guid`, `flag`) VALUES
-(@CGUID+55, @CGUID+54, 1167), -- Cabal Acolyte -> Cabal Acolyte
-(@CGUID+86, @CGUID+54, 1167), -- Cabal Deathsworn -> Cabal Acolyte
-(@CGUID+88, @CGUID+60, 1167), -- Cabal Deathsworn -> Cabal Acolyte
-(@CGUID+66, @CGUID+89, 1167), -- Cabal Acolyte -> Cabal Deathsworn
-(@CGUID+61, @CGUID+89, 1167), -- Cabal Acolyte -> Cabal Deathsworn
-(@CGUID+64, @CGUID+65, 1167), -- Cabal Acolyte -> Cabal Acolyte
-(@CGUID+56, @CGUID+57, 1167), -- Cabal Acolyte -> Cabal Acolyte
-(@CGUID+62, @CGUID+57, 1167), -- Cabal Acolyte -> Cabal Acolyte
-(@CGUID+63, @CGUID+57, 1167), -- Cabal Acolyte -> Cabal Acolyte
-(@CGUID+59, @CGUID+58, 1167), -- Cabal Acolyte -> Cabal Deathsworn
-(@CGUID+87, @CGUID+58, 1167), -- Cabal Acolyte -> Cabal Deathsworn
-(@CGUID+249, @CGUID+58, 1167), -- Cabal Acolyte -> Cabal Deathsworn
-(@CGUID+250, @CGUID+249, 1167), -- Cabal Acolyte -> Cabal Deathsworn
-(@CGUID+128, @CGUID+124, 1167), -- Cabal Familiar -> Cabal Warlock
-(@CGUID+129, @CGUID+124, 1167), -- Cabal Familiar -> Cabal Warlock
-(@CGUID+130, @CGUID+124, 1167), -- Cabal Familiar -> Cabal Warlock
-(@CGUID+131, @CGUID+124, 1167), -- Cabal Familiar -> Cabal Warlock
-(@CGUID+132, @CGUID+124, 1167), -- Cabal Familiar -> Cabal Warlock
+(@CGUID+55, @CGUID+54, 1155), -- Cabal Acolyte -> Cabal Acolyte
+(@CGUID+86, @CGUID+54, 1155), -- Cabal Deathsworn -> Cabal Acolyte
+(@CGUID+88, @CGUID+60, 1155), -- Cabal Deathsworn -> Cabal Acolyte
+(@CGUID+66, @CGUID+89, 1155), -- Cabal Acolyte -> Cabal Deathsworn
+(@CGUID+61, @CGUID+89, 1155), -- Cabal Acolyte -> Cabal Deathsworn
+(@CGUID+64, @CGUID+65, 1155), -- Cabal Acolyte -> Cabal Acolyte
+(@CGUID+56, @CGUID+57, 1155), -- Cabal Acolyte -> Cabal Acolyte
+(@CGUID+62, @CGUID+57, 1155), -- Cabal Acolyte -> Cabal Acolyte
+(@CGUID+63, @CGUID+57, 1155), -- Cabal Acolyte -> Cabal Acolyte
+(@CGUID+59, @CGUID+58, 1155), -- Cabal Acolyte -> Cabal Deathsworn
+(@CGUID+87, @CGUID+58, 1155), -- Cabal Acolyte -> Cabal Deathsworn
+(@CGUID+249, @CGUID+58, 1155), -- Cabal Acolyte -> Cabal Deathsworn
+(@CGUID+250, @CGUID+249, 1155), -- Cabal Acolyte -> Cabal Deathsworn
+(@CGUID+128, @CGUID+124, 1155), -- Cabal Familiar -> Cabal Warlock
+(@CGUID+129, @CGUID+124, 1155), -- Cabal Familiar -> Cabal Warlock
+(@CGUID+130, @CGUID+124, 1155), -- Cabal Familiar -> Cabal Warlock
+(@CGUID+131, @CGUID+124, 1155), -- Cabal Familiar -> Cabal Warlock
+(@CGUID+132, @CGUID+124, 1155), -- Cabal Familiar -> Cabal Warlock
 (@CGUID+135, @CGUID+133, 1679), -- Fel Guardhound -> Cabal Familiar
-(@CGUID+125, @CGUID+133, 1167), -- Cabal Familiar -> Cabal Warlock
-(@CGUID+68, @CGUID+90, 1167), -- Cabal Deathsworn -> Cabal Acolyte
-(@CGUID+91, @CGUID+90, 1167), -- Cabal Deathsworn -> Cabal Acolyte
-(@CGUID+247, @CGUID+90, 1167), -- Cabal Deathsworn -> Cabal Acolyte
-(@CGUID+248, @CGUID+247, 1167), -- Cabal Familiar -> Cabal Acolyte
-(@CGUID+154, @CGUID+155, 1167), -- Cabal Ritualist -> Cabal Ritualist
-(@CGUID+156, @CGUID+155, 1167), -- Cabal Ritualist -> Cabal Ritualist
-(@CGUID+166, @CGUID+155, 1167), -- Cabal Ritualist -> Cabal Ritualist
-(@CGUID+159, @CGUID+158, 1167), -- Cabal Ritualist -> Cabal Ritualist
-(@CGUID+160, @CGUID+158, 1167), -- Cabal Ritualist -> Cabal Ritualist
-(@CGUID+165, @CGUID+158, 1167), -- Cabal Ritualist -> Cabal Ritualist
-(@CGUID+150, @CGUID+151, 1167), -- Cabal Ritualist -> Cabal Ritualist
-(@CGUID+152, @CGUID+151, 1167), -- Cabal Ritualist -> Cabal Ritualist
-(@CGUID+167, @CGUID+151, 1167), -- Cabal Ritualist -> Cabal Ritualist
-(@CGUID+148, @CGUID+147, 1167), -- Cabal Ritualist -> Cabal Ritualist
-(@CGUID+149, @CGUID+147, 1167), -- Cabal Ritualist -> Cabal Ritualist
-(@CGUID+168, @CGUID+147, 1167), -- Cabal Ritualist -> Cabal Ritualist
-(@CGUID+163, @CGUID+157, 1167), -- Cabal Ritualist -> Cabal Ritualist
-(@CGUID+164, @CGUID+157, 1167), -- Cabal Ritualist -> Cabal Ritualist
-(@CGUID+169, @CGUID+157, 1167), -- Cabal Ritualist -> Cabal Ritualist
-(@CGUID+161, @CGUID+153, 1167), -- Cabal Ritualist -> Cabal Ritualist
-(@CGUID+162, @CGUID+153, 1167), -- Cabal Ritualist -> Cabal Ritualist
-(@CGUID+170, @CGUID+153, 1167), -- Cabal Ritualist -> Cabal Ritualist
-(@CGUID+31, @CGUID+69, 1167), -- Cabal Cultist -> Cabal Acolyte
-(@CGUID+30, @CGUID+69, 1167), -- Cabal Cultist -> Cabal Acolyte
-(@CGUID+92, @CGUID+69, 1167), -- Cabal Deathsworn -> Cabal Acolyte
+(@CGUID+125, @CGUID+133, 1155), -- Cabal Familiar -> Cabal Warlock
+(@CGUID+68, @CGUID+90, 1155), -- Cabal Deathsworn -> Cabal Acolyte
+(@CGUID+91, @CGUID+90, 1155), -- Cabal Deathsworn -> Cabal Acolyte
+(@CGUID+247, @CGUID+90, 1155), -- Cabal Deathsworn -> Cabal Acolyte
+(@CGUID+248, @CGUID+247, 1155), -- Cabal Familiar -> Cabal Acolyte
+(@CGUID+154, @CGUID+155, 1155), -- Cabal Ritualist -> Cabal Ritualist
+(@CGUID+156, @CGUID+155, 1155), -- Cabal Ritualist -> Cabal Ritualist
+(@CGUID+166, @CGUID+155, 1155), -- Cabal Ritualist -> Cabal Ritualist
+(@CGUID+159, @CGUID+158, 1155), -- Cabal Ritualist -> Cabal Ritualist
+(@CGUID+160, @CGUID+158, 1155), -- Cabal Ritualist -> Cabal Ritualist
+(@CGUID+165, @CGUID+158, 1155), -- Cabal Ritualist -> Cabal Ritualist
+(@CGUID+150, @CGUID+151, 1155), -- Cabal Ritualist -> Cabal Ritualist
+(@CGUID+152, @CGUID+151, 1155), -- Cabal Ritualist -> Cabal Ritualist
+(@CGUID+167, @CGUID+151, 1155), -- Cabal Ritualist -> Cabal Ritualist
+(@CGUID+148, @CGUID+147, 1155), -- Cabal Ritualist -> Cabal Ritualist
+(@CGUID+149, @CGUID+147, 1155), -- Cabal Ritualist -> Cabal Ritualist
+(@CGUID+168, @CGUID+147, 1155), -- Cabal Ritualist -> Cabal Ritualist
+(@CGUID+163, @CGUID+157, 1155), -- Cabal Ritualist -> Cabal Ritualist
+(@CGUID+164, @CGUID+157, 1155), -- Cabal Ritualist -> Cabal Ritualist
+(@CGUID+169, @CGUID+157, 1155), -- Cabal Ritualist -> Cabal Ritualist
+(@CGUID+161, @CGUID+153, 1155), -- Cabal Ritualist -> Cabal Ritualist
+(@CGUID+162, @CGUID+153, 1155), -- Cabal Ritualist -> Cabal Ritualist
+(@CGUID+170, @CGUID+153, 1155), -- Cabal Ritualist -> Cabal Ritualist
+(@CGUID+31, @CGUID+69, 1155), -- Cabal Cultist -> Cabal Acolyte
+(@CGUID+30, @CGUID+69, 1155), -- Cabal Cultist -> Cabal Acolyte
+(@CGUID+92, @CGUID+69, 1155), -- Cabal Deathsworn -> Cabal Acolyte
 (@CGUID+69, @CGUID+137, 1), -- Cabal Acolyte -> Blackheart the Inciter
-(@CGUID+32, @CGUID+70, 1167), -- Cabal Cultist -> Cabal Acolyte
-(@CGUID+33, @CGUID+70, 1167), -- Cabal Cultist -> Cabal Acolyte
-(@CGUID+94, @CGUID+70, 1167), -- Cabal Deathsworn -> Cabal Acolyte
-(@CGUID+104, @CGUID+70, 1167), -- Cabal Shadow Priest -> Cabal Acolyte
+(@CGUID+32, @CGUID+70, 1155), -- Cabal Cultist -> Cabal Acolyte
+(@CGUID+33, @CGUID+70, 1155), -- Cabal Cultist -> Cabal Acolyte
+(@CGUID+94, @CGUID+70, 1155), -- Cabal Deathsworn -> Cabal Acolyte
+(@CGUID+104, @CGUID+70, 1155), -- Cabal Shadow Priest -> Cabal Acolyte
 (@CGUID+70, @CGUID+137, 1), -- Cabal Acolyte -> Blackheart the Inciter
-(@CGUID+34, @CGUID+102, 1167), -- Cabal Cultist -> Cabal Shadow Priest
-(@CGUID+71, @CGUID+102, 1167), -- Cabal Acolyte -> Cabal Shadow Priest
-(@CGUID+72, @CGUID+102, 1167), -- Cabal Acolyte -> Cabal Shadow Priest
-(@CGUID+95, @CGUID+102, 1167), -- Cabal Deathsworn -> Cabal Shadow Priest
+(@CGUID+34, @CGUID+102, 1155), -- Cabal Cultist -> Cabal Shadow Priest
+(@CGUID+71, @CGUID+102, 1155), -- Cabal Acolyte -> Cabal Shadow Priest
+(@CGUID+72, @CGUID+102, 1155), -- Cabal Acolyte -> Cabal Shadow Priest
+(@CGUID+95, @CGUID+102, 1155), -- Cabal Deathsworn -> Cabal Shadow Priest
 (@CGUID+102, @CGUID+137, 1), -- Cabal Shadow Priest -> Blackheart the Inciter
-(@CGUID+127, @CGUID+36, 1167), -- Cabal Warlock -> Cabal Cultist
-(@CGUID+136, @CGUID+36, 1167), -- Fel Guardhound -> Cabal Cultist
-(@CGUID+74, @CGUID+36, 1167), -- Cabal Acolyte -> Cabal Cultist
-(@CGUID+93, @CGUID+36, 1167), -- Cabal Deathsworn -> Cabal Cultist
-(@CGUID+103, @CGUID+36, 1167), -- Cabal Shadow Priest -> Cabal Cultist
+(@CGUID+127, @CGUID+36, 1155), -- Cabal Warlock -> Cabal Cultist
+(@CGUID+136, @CGUID+36, 1155), -- Fel Guardhound -> Cabal Cultist
+(@CGUID+74, @CGUID+36, 1155), -- Cabal Acolyte -> Cabal Cultist
+(@CGUID+93, @CGUID+36, 1155), -- Cabal Deathsworn -> Cabal Cultist
+(@CGUID+103, @CGUID+36, 1155), -- Cabal Shadow Priest -> Cabal Cultist
 (@CGUID+36, @CGUID+137, 1), -- Cabal Cultist -> Blackheart the Inciter
-(@CGUID+39, @CGUID+37, 1167), -- Cabal Cultist -> Cabal Cultist
+(@CGUID+39, @CGUID+37, 1155), -- Cabal Cultist -> Cabal Cultist
 (@CGUID+37, @CGUID+137, 1), -- Cabal Cultist -> Blackheart the Inciter
-(@CGUID+35, @CGUID+73, 1167), -- Cabal Cultist -> Cabal Acolyte
-(@CGUID+96, @CGUID+73, 1167), -- Cabal Deathsworn -> Cabal Acolyte
-(@CGUID+126, @CGUID+73, 1167), -- Cabal Warlock -> Cabal Acolyte
-(@CGUID+134, @CGUID+73, 1167), -- Cabal Familiar -> Cabal Acolyte
-(@CGUID+105, @CGUID+73, 1167), -- Cabal Shadow Priest -> Cabal Acolyte
+(@CGUID+35, @CGUID+73, 1155), -- Cabal Cultist -> Cabal Acolyte
+(@CGUID+96, @CGUID+73, 1155), -- Cabal Deathsworn -> Cabal Acolyte
+(@CGUID+126, @CGUID+73, 1155), -- Cabal Warlock -> Cabal Acolyte
+(@CGUID+134, @CGUID+73, 1155), -- Cabal Familiar -> Cabal Acolyte
+(@CGUID+105, @CGUID+73, 1155), -- Cabal Shadow Priest -> Cabal Acolyte
 (@CGUID+73, @CGUID+137, 1), -- Cabal Acolyte -> Blackheart the Inciter
-(@CGUID+97, @CGUID+38, 1167), -- Cabal Deathsworn -> Cabal Cultist
+(@CGUID+97, @CGUID+38, 1155), -- Cabal Deathsworn -> Cabal Cultist
 (@CGUID+38, @CGUID+137, 1), -- Cabal Cultist -> Blackheart the Inciter
 (@CGUID+240, @CGUID+137, 1), -- Malicious Instructor -> Blackheart the Inciter
 (@CGUID+241, @CGUID+137, 1), -- Malicious Instructor -> Blackheart the Inciter
 (@CGUID+242, @CGUID+137, 1), -- Malicious Instructor -> Blackheart the Inciter
-(@CGUID+41, @CGUID+40, 1167), -- Cabal Cultist -> Cabal Cultist
-(@CGUID+75, @CGUID+98, 1167), -- Cabal Acolyte -> Cabal Deathsworn
-(@CGUID+99, @CGUID+98, 1167), -- Cabal Deathsworn -> Cabal Deathsworn
+(@CGUID+41, @CGUID+40, 1155), -- Cabal Cultist -> Cabal Cultist
+(@CGUID+75, @CGUID+98, 1155), -- Cabal Acolyte -> Cabal Deathsworn
+(@CGUID+99, @CGUID+98, 1155), -- Cabal Deathsworn -> Cabal Deathsworn
 (@CGUID+106, @CGUID+29, 1679), -- Cabal Zealot -> Cabal Cultist
 (@CGUID+107, @CGUID+29, 1679), -- Cabal Zealot -> Cabal Cultist
 (@CGUID+234, @CGUID+29, 1679), -- Cabal Fanatic -> Cabal Cultis
 (@CGUID+42, @CGUID+108, 1679), -- Cabal Cultist -> Cabal Zealot
 (@CGUID+111, @CGUID+108, 1679), -- Cabal Zealot -> Cabal Zealot
 (@CGUID+235, @CGUID+108, 1679), -- Cabal Fanatic -> Cabal Zealot
-(@CGUID+109, @CGUID+236, 1167), -- Cabal Zealot -> Cabal Fanatic
-(@CGUID+110, @CGUID+236, 1167), -- Cabal Zealot -> Cabal Fanatic
-(@CGUID+237, @CGUID+236, 1167), -- Cabal Fanatic -> Cabal Fanatic
+(@CGUID+109, @CGUID+236, 1155), -- Cabal Zealot -> Cabal Fanatic
+(@CGUID+110, @CGUID+236, 1155), -- Cabal Zealot -> Cabal Fanatic
+(@CGUID+237, @CGUID+236, 1155), -- Cabal Fanatic -> Cabal Fanatic
 (@CGUID+43, @CGUID+238, 1679), -- Cabal Cultist -> Cabal Fanatic
 (@CGUID+44, @CGUID+238, 1679), -- Cabal Cultist -> Cabal Fanatic
 (@CGUID+233, @CGUID+238, 1679), -- Cabal Fanatic -> Cabal Fanatic
@@ -1145,9 +1143,9 @@ INSERT INTO `gameobject` (`guid`, `id`, `map`, `spawnMask`, `position_x`, `posit
 (@OGUID+83, 181569, 555, 3, -362.0406, -24.65191, 16.78804, 1.832595, 0, 0, 0.7933531, 0.6087617, 86400, 86400, 255, 1), -- Rich Adamantite Deposit
 (@OGUID+84, 181569, 555, 3, -444.7061, -134.0397, 9.709791, 2.879789, 0, 0, 0.9914446, 0.1305283, 86400, 86400, 255, 1), -- Rich Adamantite Deposit
 (@OGUID+85, 181569, 555, 3, -413.9675, -148.7516, 12.09024, 1.710422, 0, 0, 0.7547092, 0.6560594, 86400, 86400, 255, 1), -- Rich Adamantite Deposit
-(@OGUID+86, 181557, 555, 3, -343.0129, -289.6252, 18.65376, 3.926996, 0, 0, -0.9238787, 0.3826855, 86400, 86400, 255, 1), -- Khorium
-(@OGUID+87, 181557, 555, 3, -352.1901, -60.70448, 17.71093, 5.759588, 0, 0, -0.2588186, 0.9659259, 86400, 86400, 255, 1), -- Khorium
-(@OGUID+88, 181557, 555, 3, -413.9675, -148.7516, 12.09024, 1.710422, 0, 0, 0.7547092, 0.6560594, 86400, 86400, 255, 1), -- Khorium
+(@OGUID+86, 181557, 555, 3, -343.0129, -289.6252, 18.65376, 3.926996, 0, 0, -0.9238787, 0.3826855, 86400, 86400, 255, 1), -- Khorium Vein
+(@OGUID+87, 181557, 555, 3, -352.1901, -60.70448, 17.71093, 5.759588, 0, 0, -0.2588186, 0.9659259, 86400, 86400, 255, 1), -- Khorium Vein
+(@OGUID+88, 181557, 555, 3, -413.9675, -148.7516, 12.09024, 1.710422, 0, 0, 0.7547092, 0.6560594, 86400, 86400, 255, 1), -- Khorium Vein
 (@OGUID+89, 184940, 555, 3, -290.183, -91.233, 8.07305, 0.349066, 0, 0, 0, 0, 86400, 86400, 100, 1), -- Bound Adamantite Chest
 (@OGUID+90, 184941, 555, 3, -290.183, -91.233, 8.07305, 0.349066, 0, 0, 0, 0, 86400, 86400, 100, 1), -- Solid Adamantite Chest
 (@OGUID+91, 184940, 555, 3, -455.751, -197.417, 12.6891, 0.523599, 0, 0, 0.2588186, 0.9659259, 86400, 86400, 100, 1), -- Bound Adamantite Chest
@@ -1162,7 +1160,8 @@ INSERT INTO `gameobject` (`guid`, `id`, `map`, `spawnMask`, `position_x`, `posit
 (@OGUID+100, 184941, 555, 3, -287.9515, 21.96442, 8.073029, -0.8028509, 0, 0, 0, 0, 86400, 86400, 100, 1), -- Solid Adamantite Chest
 (@OGUID+101, 184940, 555, 3, -326.1286, -240.5086, 12.68316, -1.797689, 0, 0, 0, 0, 86400, 86400, 100, 1), -- Bound Adamantite Chest
 (@OGUID+102, 184941, 555, 3, -326.1286, -240.5086, 12.68316, -1.797689, 0, 0, 0, 0, 86400, 86400, 100, 1), -- Solid Adamantite Chest
-(@OGUID+103, 181569, 555, 3, -234.0617, -97.60569, 15.50827, 0.7504908, 0, 0, 0.3665009, 0.9304177, 86400, 86400, 255, 1); -- Adamantite Deposit
+(@OGUID+103, 181569, 555, 3, -234.0617, -97.60569, 15.50827, 0.7504908, 0, 0, 0.3665009, 0.9304177, 86400, 86400, 255, 1), -- Adamantite Deposit
+(@OGUID+104, 181557, 555, 3, -461.4516, -168.9303, 21.16686, 3.612838, 0, 0, -0.9723692, 0.2334484, 86400, 86400, 255, 1); -- Khorium Vein
 
 -- ======
 -- EVENTS
@@ -1179,13 +1178,13 @@ INSERT INTO `game_event_creature_data` (`guid`, `entry_id`, `modelid`, `equipmen
 -- =======
 
 INSERT INTO `pool_pool` (`pool_id`, `mother_pool`, `chance`, `description`) VALUES
-(@PGUID+24, @PGUID+23, 0, 'Shadow Labyrinth - Adamantite Deposit / Rich Adamantite Deposit / Khorium - Pool 1'),
+(@PGUID+24, @PGUID+23, 0, 'Shadow Labyrinth - Adamantite Deposit / Rich Adamantite Deposit / Khorium Vein - Pool 1'),
 (@PGUID+25, @PGUID+23, 0, 'Shadow Labyrinth - Adamantite Deposit / Rich Adamantite Deposit - Pool 2'),
 (@PGUID+26, @PGUID+23, 0, 'Shadow Labyrinth - Adamantite Deposit / Rich Adamantite Deposit - Pool 3'),
-(@PGUID+27, @PGUID+23, 0, 'Shadow Labyrinth - Adamantite Deposit / Rich Adamantite Deposit / Khorium - Pool 4'),
+(@PGUID+27, @PGUID+23, 0, 'Shadow Labyrinth - Adamantite Deposit / Rich Adamantite Deposit / Khorium Vein - Pool 4'),
 (@PGUID+28, @PGUID+23, 0, 'Shadow Labyrinth - Adamantite Deposit / Rich Adamantite Deposit - Pool 5'),
 (@PGUID+29, @PGUID+23, 0, 'Shadow Labyrinth - Adamantite Deposit / Rich Adamantite Deposit - Pool 6'),
-(@PGUID+30, @PGUID+23, 0, 'Shadow Labyrinth - Adamantite Deposit / Rich Adamantite Deposit / Khorium - Pool 7'),
+(@PGUID+30, @PGUID+23, 0, 'Shadow Labyrinth - Adamantite Deposit / Rich Adamantite Deposit / Khorium Vein - Pool 7'),
 (@PGUID+31, @PGUID+21, 0, 'Shadow Labyrinth - Bound / Solid Adamantite Chest - Pool 1'),
 (@PGUID+32, @PGUID+21, 0, 'Shadow Labyrinth - Bound / Solid Adamantite Chest - Pool 2'),
 (@PGUID+33, @PGUID+21, 0, 'Shadow Labyrinth - Bound / Solid Adamantite Chest - Pool 3'),
@@ -1202,13 +1201,13 @@ INSERT INTO `pool_template` (`entry`, `max_limit`, `description`) VALUES
 (@PGUID+21, 2, 'Shadow Labyrinth - Master Chest Pool'), -- gameobject
 (@PGUID+22, 4, 'Shadow Labyrinth - Master Ancient Lichen (181278) Pool'),
 (@PGUID+23, 3, 'Shadow Labyrinth - Master Mineral Pool'),
-(@PGUID+24, 1, 'Shadow Labyrinth - Adamantite Deposit / Rich Adamantite Deposit / Khorium - Pool 1'),
+(@PGUID+24, 1, 'Shadow Labyrinth - Adamantite Deposit / Rich Adamantite Deposit / Khorium Vein - Pool 1'),
 (@PGUID+25, 1, 'Shadow Labyrinth - Adamantite Deposit / Rich Adamantite Deposit - Pool 2'),
 (@PGUID+26, 1, 'Shadow Labyrinth - Adamantite Deposit / Rich Adamantite Deposit - Pool 3'),
-(@PGUID+27, 1, 'Shadow Labyrinth - Adamantite Deposit / Rich Adamantite Deposit / Khorium - Pool 4'),
+(@PGUID+27, 1, 'Shadow Labyrinth - Adamantite Deposit / Rich Adamantite Deposit / Khorium Vein - Pool 4'),
 (@PGUID+28, 1, 'Shadow Labyrinth - Adamantite Deposit / Rich Adamantite Deposit - Pool 5'),
 (@PGUID+29, 1, 'Shadow Labyrinth - Adamantite Deposit / Rich Adamantite Deposit - Pool 6'),
-(@PGUID+30, 1, 'Shadow Labyrinth - Adamantite Deposit / Rich Adamantite Deposit / Khorium - Pool 7'),
+(@PGUID+30, 1, 'Shadow Labyrinth - Adamantite Deposit / Rich Adamantite Deposit / Khorium Vein - Pool 7'),
 (@PGUID+31, 1, 'Shadow Labyrinth - Bound / Solid Adamantite Chest - Pool 1'),
 (@PGUID+32, 1, 'Shadow Labyrinth - Bound / Solid Adamantite Chest - Pool 2'),
 (@PGUID+33, 1, 'Shadow Labyrinth - Bound / Solid Adamantite Chest - Pool 3'),
@@ -1279,7 +1278,7 @@ INSERT INTO `pool_gameobject` (`guid`, `pool_entry`, `chance`, `description`) VA
 (@OGUID+69, @PGUID+22, 0, 'Shadow Labyrinth - Ancient Lichen (181278)'),
 (@OGUID+70, @PGUID+22, 0, 'Shadow Labyrinth - Ancient Lichen (181278)'),
 (@OGUID+71, @PGUID+38, 0, 'Shadow Labyrinth - Adamantite Deposit (181556) - #8'),
-(@OGUID+72, @PGUID+26, 0, 'Shadow Labyrinth - Adamantite Deposit (181556) - Pool 3'),
+(@OGUID+72, @PGUID+26, 0, 'Shadow Labyrinth - Adamantite Deposit (181556) - #3'),
 (@OGUID+73, @PGUID+23, 0, 'Shadow Labyrinth - Adamantite Deposit (181556)'),
 (@OGUID+74, @PGUID+27, 0, 'Shadow Labyrinth - Adamantite Deposit (181556) - Pool 4'),
 (@OGUID+75, @PGUID+28, 0, 'Shadow Labyrinth - Adamantite Deposit (181556) - Pool 5'),
@@ -1287,15 +1286,15 @@ INSERT INTO `pool_gameobject` (`guid`, `pool_entry`, `chance`, `description`) VA
 (@OGUID+77, @PGUID+30, 0, 'Shadow Labyrinth - Adamantite Deposit (181556) - Pool 7'),
 (@OGUID+78, @PGUID+23, 0, 'Shadow Labyrinth - Adamantite Deposit (181556)'),
 (@OGUID+79, @PGUID+24, 0, 'Shadow Labyrinth - Rich Adamantite Deposit (181569) - Pool 1'),
-(@OGUID+80, @PGUID+26, 0, 'Shadow Labyrinth - Rich Adamantite Deposit (181569) - Pool 3'),
+(@OGUID+80, @PGUID+26, 0, 'Shadow Labyrinth - Rich Adamantite Deposit (181569) - #3'),
 (@OGUID+81, @PGUID+25, 0, 'Shadow Labyrinth - Rich Adamantite Deposit (181569) - Pool 2'),
 (@OGUID+82, @PGUID+27, 0, 'Shadow Labyrinth - Rich Adamantite Deposit (181569) - Pool 4'),
 (@OGUID+83, @PGUID+28, 0, 'Shadow Labyrinth - Rich Adamantite Deposit (181569) - Pool 5'),
 (@OGUID+84, @PGUID+29, 0, 'Shadow Labyrinth - Rich Adamantite Deposit (181569) - Pool 6'),
 (@OGUID+85, @PGUID+30, 0, 'Shadow Labyrinth - Rich Adamantite Deposit (181569) - Pool 7'),
-(@OGUID+86, @PGUID+24, 0, 'Shadow Labyrinth - Khorium (181557) - Pool 1'),
-(@OGUID+87, @PGUID+27, 0, 'Shadow Labyrinth - Khorium (181557) - Pool 4'),
-(@OGUID+88, @PGUID+30, 0, 'Shadow Labyrinth - Khorium (181557) - Pool 7'),
+(@OGUID+86, @PGUID+24, 0, 'Shadow Labyrinth - Khorium Vein (181557) - Pool 1'),
+(@OGUID+87, @PGUID+27, 0, 'Shadow Labyrinth - Khorium Vein (181557) - Pool 4'),
+(@OGUID+88, @PGUID+30, 0, 'Shadow Labyrinth - Khorium Vein (181557) - Pool 7'),
 (@OGUID+89, @PGUID+31, 0, 'Shadow Labyrinth - Bound Adamantite Chest (184940)'),
 (@OGUID+90, @PGUID+31, 0, 'Shadow Labyrinth - Solid Adamantite Chest (184941)'),
 (@OGUID+91, @PGUID+32, 0, 'Shadow Labyrinth - Bound Adamantite Chest (184940)'),
@@ -1310,7 +1309,8 @@ INSERT INTO `pool_gameobject` (`guid`, `pool_entry`, `chance`, `description`) VA
 (@OGUID+100, @PGUID+36, 0, 'Shadow Labyrinth - Solid Adamantite Chest (184941)'),
 (@OGUID+101, @PGUID+37, 0, 'Shadow Labyrinth - Bound Adamantite Chest (184940)'),
 (@OGUID+102, @PGUID+37, 0, 'Shadow Labyrinth - Solid Adamantite Chest (184941)'),
-(@OGUID+103, @PGUID+38, 0, 'Shadow Labyrinth - Rich Adamantite Deposit (181569) - #8');
+(@OGUID+103, @PGUID+38, 0, 'Shadow Labyrinth - Rich Adamantite Deposit (181569) - #8'),
+(@OGUID+104, @PGUID+26, 0, 'Shadow Labyrinth - Khorium Vein (181557) - #3');
 
 -- INSERT INTO `pool_gameobject_template` (`id`, `pool_entry`, `chance`, `description`) VALUES
 

@@ -11,6 +11,12 @@ SET @CGUID := 5780000; -- creatures
 SET @OGUID := 5780000; -- gameobjects
 SET @PGUID := 52300;   -- pools
 
+-- texts
+-- 2000025600 - 2000025799 Reserved
+SET @TGUID := 2000025600; 
+
+
+
 -- =========
 -- CREATURES
 -- =========
@@ -179,15 +185,15 @@ INSERT INTO `creature_template_addon` (`entry`, `mount`, `bytes1`, `b2_0_sheath`
 (28276,0,50331648,1,0,0,8192,NULL),
 (32261,0,0,1,0,0,0,NULL),
 -- summoned drakes
-(27755,0,0,0,0,0,0,'50325'),
-(27692,0,0,0,0,0,0,'50325'),
-(27756,0,0,0,0,0,0,'50248 50325');
+(27755,0,0,0,0,0,0,'50325 50296'),
+(27692,0,0,0,0,0,0,'50325 50296'),
+(27756,0,0,0,0,0,0,'50248 50325 50296');
 
 -- INSERT INTO `creature_addon` (`guid`, `mount`, `bytes1`, `b2_0_sheath`, `b2_1_pvp_state`, `emote`, `moveflags`, `auras`) VALUES
 
 -- Waypoints
 -- Ley-Guardian Eregos - summoned (BaseScript wont remove it)
-UPDATE creature_template SET MovementType = 2 WHERE entry = 27656;
+UPDATE creature_template SET MovementType = 2 WHERE entry IN (27656,31561);
 DELETE FROM `creature_movement_template` WHERE entry = 27656;
 INSERT INTO `creature_movement_template` (`entry`, `pathId`, `point`, `position_x`, `position_y`, `position_z`, `waittime`, `script_id`, `orientation`) VALUES
 -- Ley-Guardian Eregos
@@ -233,7 +239,9 @@ INSERT INTO `creature_movement` (`id`, `point`, `position_x`, `position_y`, `pos
 (@CGUID+89,13,1179.5,1014.78,361.07,0,0,4.42555),
 (@CGUID+89,14,1173.92,1002.97,361.07,0,0,4.12394);
 
--- INSERT INTO `creature_linking_template` (`entry`, `map`, `master_entry`, `flag`, `search_range`) VALUES
+INSERT INTO `creature_linking_template` (`entry`, `map`, `master_entry`, `flag`, `search_range`) VALUES
+(28166,578,27654,16+4096,50),
+(28276,578,27656,4096,0);
 
 INSERT INTO `creature_linking` (`guid`, `master_guid`, `flag`) VALUES
 -- Centrifuge Construct / Ring-Lord Sorcerress / Ring-Lord Conjurer
@@ -340,16 +348,16 @@ INSERT INTO `dbscripts_on_creature_death` (`id`, `delay`, `command`, `datalong`,
 (27654,6000,3,0,0,0,27658,75,0,0,0,0,0,939.73,1044.25,359.96,0,'Belgaristrasz - move out of the cage'),
 (27654,6000,3,0,0,0,27657,75,0,0,0,0,0,948.57,1032.11,359.96,0,'Verdisa - move out of the cage'),
 (27654,6000,3,0,0,0,27659,75,0,0,0,0,0,941.93,1060.08,359.96,0,'Eternos - move out of the cage'),
-(27654,9000,0,0,0,0,27658,75,0,2000005525,0,0,0,0,0,0,0,'Belgaristrasz - say greet'),
-(27654,17000,0,0,0,0,27447,360,0,2000005526,0,0,0,0,0,0,0,'Varos - yell intro, map wide'),
+(27654,9000,0,0,0,0,27658,75,0,@TGUID+0,0,0,0,0,0,0,0,'Belgaristrasz - say greet'),
+(27654,17000,0,0,0,0,27447,360,0,@TGUID+1,0,0,0,0,0,0,0,'Varos - yell intro, map wide'),
 (27654,17000,16,13648,8,0,27447,360,0,0,0,0,0,0,0,0,0,'Varos - yell intro sound, map wide'),
 -- Image of Belgaristrasz
 (27447,1000,15,12980,0,0,28012,10,0,0,0,0,0,0,0,0,0,'Image of Belgaristrasz - cast teleport visual'),
-(27447,5000,0,0,0,0,28012,75,0,2000005527,0,0,0,0,0,0,0,'Image of Belgaristrasz - say after Varos'),
+(27447,5000,0,0,0,0,28012,75,0,@TGUID+2,0,0,0,0,0,0,0,'Image of Belgaristrasz - say after Varos'),
 -- Image of Belgaristrasz
 (27655,1000,15,12980,0,0,28012,10,0,0,0,0,0,0,0,0,0,'Image of Belgaristrasz - cast teleport visual'),
-(27655,5000,0,0,0,0,28012,75,0,2000005528,0,0,0,0,0,0,0,'Image of Belgaristrasz - say after Urom'),
-(27655,10000,0,0,0,0,28012,75,0,2000005898,0,0,0,0,0,0,0,'Image of Belgaristrasz - say after Urom'),
+(27655,5000,0,0,0,0,28012,75,0,@TGUID+3,0,0,0,0,0,0,0,'Image of Belgaristrasz - say after Urom'),
+(27655,10000,0,0,0,0,28012,75,0,@TGUID+4,0,0,0,0,0,0,0,'Image of Belgaristrasz - say after Urom'),
 -- Image of Belgaristrasz
 (27656,0,10,28012,180000,0,0,0,0,0,0,0,0,1022.39,1051.51,605.62,0.07,'Summon Image of Belgaristrasz'),
 (27656,1000,15,12980,0,0,28012,360,0,0,0,0,0,0,0,0,0,'Image of Belgaristrasz - cast teleport visual');
@@ -361,22 +369,10 @@ DELETE FROM `dbscripts_on_relay` WHERE id BETWEEN 20047 AND 20050;
 INSERT INTO `dbscripts_on_relay` (`id`, `delay`, `command`, `datalong`, `datalong2`, `datalong3`, `buddy_entry`, `search_radius`, `data_flags`, `dataint`, `dataint2`, `dataint3`, `dataint4`, `x`, `y`, `z`, `o`, `comments`) VALUES
 -- for Amber Drake - related to vehicle control
 (20047,0,37,0,0,0,0,0,2,0,0,0,0,0,0,0,0,'Part of Amber Drake: veh -> player'),
-(20047,4000,15,49459,0,0,0,0,0,0,0,0,0,0,0,0,0,'Part of Amber Drake: player -> player'),
-(20047,4000,15,49460,0,0,0,0,0,0,0,0,0,0,0,0,0,'Part of Amber Drake:'),
-(20047,5000,15,53797,0,0,0,0,0,0,0,0,0,0,0,0,0,'Part of Amber Drake:'),
 -- for Emerald Drake - related to vehicle control
 (20048,0,37,0,0,0,0,0,2,0,0,0,0,0,0,0,0,'Part of Emerald Drake: veh -> player'),
-(20048,4000,15,49427,0,0,0,0,0,0,0,0,0,0,0,0,0,'Part of Emerald Drake: player -> player'),
-(20048,4000,15,49346,0,0,0,0,0,0,0,0,0,0,0,0,0,'Part of Emerald Drake:'),
-(20048,5000,15,53797,0,0,0,0,0,0,0,0,0,0,0,0,0,'Part of Emerald Drake:'),
 -- for Ruby Drake - related to vehicle control
-(20049,0,37,0,0,0,0,0,2,0,0,0,0,0,0,0,0,'Part of Ruby Drake: veh -> player'),
-(20049,4000,15,49463,0,0,0,0,0,0,0,0,0,0,0,0,0,'Part of Ruby Drake: player -> player'),
-(20049,4000,15,49464,0,0,0,0,0,0,0,0,0,0,0,0,0,'Part of Ruby Drake:'),
-(20049,5000,15,53797,0,0,0,0,0,0,0,0,0,0,0,0,0,'Part of Ruby Drake:'),
--- for all drakes - related to vehicle control
-(20050,0,15,50550,0,0,0,0,2,0,0,0,0,0,0,0,0,'Part of Oculus Drakes: veh -> player'),
-(20050,0,15,50553,0,0,0,0,0,0,0,0,0,0,0,0,0,'Part of Oculus Drakes: player -> player');
+(20049,0,37,0,0,0,0,0,2,0,0,0,0,0,0,0,0,'Part of Ruby Drake: veh -> player');
 
 -- INSERT INTO `dbscripts_on_event` (`id`, `delay`, `command`, `datalong`, `datalong2`, `datalong3`, `buddy_entry`, `search_radius`, `data_flags`, `dataint`, `dataint2`, `dataint3`, `dataint4`, `x`, `y`, `z`, `o`, `comments`) VALUES
 -- INSERT INTO `dbscripts_on_spell` (`id`, `delay`, `command`, `datalong`, `datalong2`, `datalong3`, `buddy_entry`, `search_radius`, `data_flags`, `dataint`, `dataint2`, `dataint3`, `dataint4`, `x`, `y`, `z`, `o`, `comments`) VALUES
@@ -402,12 +398,12 @@ INSERT INTO `dbscripts_on_gossip` (`id`, `delay`, `command`, `datalong`, `datalo
 -- INSERT INTO `dbscripts_on_quest_start` (`id`, `delay`, `command`, `datalong`, `datalong2`, `datalong3`, `buddy_entry`, `search_radius`, `data_flags`, `dataint`, `dataint2`, `dataint3`, `dataint4`, `x`, `y`, `z`, `o`, `comments`) VALUES
 -- INSERT INTO `dbscripts_on_quest_end` (`id`, `delay`, `command`, `datalong`, `datalong2`, `datalong3`, `buddy_entry`, `search_radius`, `data_flags`, `dataint`, `dataint2`, `dataint3`, `dataint4`, `x`, `y`, `z`, `o`, `comments`) VALUES
 
-DELETE FROM `dbscript_string` WHERE `entry` IN (2000005525,2000005526,2000005527,2000005528,2000005898);
+DELETE FROM `dbscript_string` WHERE `entry` BETWEEN @TGUID+0 AND @TGUID+4;
 INSERT INTO `dbscript_string` (`entry`, `content_default`, `sound`, `type`, `language`, `emote`, `comment`) VALUES
-(2000005525,'Thank you for freeing us, mortals. Beware, the Blue Flight is alerted to your presence. Even now, Malygos sends Varos Cloudstrider and his ring guardians to defend the Oculus. You will need our help to stand a chance.',0,0,0,1,NULL),
-(2000005526,'Intruders, your victory will be short-lived. I am Commander Varos Cloudstrider. My drakes control the skies and protect this conduit. I will see to it personally that the Oculus does not fall into your hands!',0,6,0,1,NULL),
-(2000005527,'The trickster Mage-Lord Urom protects the third ring. He will appear alone and defenseless, but do not be fooled by appearances! Urom is a powerful conjurer who commands a menagerie of Phantasmal creatures. Seek him out above.',0,0,0,1,NULL),
-(2000005528,'Your greatest challenge lies ahead. Ley-Guardian Eregos is a Blue dragon of immense power. You will find him flying above the uppermost ring.',0,0,0,0,NULL),
-(2000005898,'The full power of your drakes has been unlocked.  Use their power to defeat Eregos!',0,0,0,1,NULL);
+(@TGUID+0,'Thank you for freeing us, mortals. Beware, the Blue Flight is alerted to your presence. Even now, Malygos sends Varos Cloudstrider and his ring guardians to defend the Oculus. You will need our help to stand a chance.',0,0,0,1,NULL),
+(@TGUID+1,'Intruders, your victory will be short-lived. I am Commander Varos Cloudstrider. My drakes control the skies and protect this conduit. I will see to it personally that the Oculus does not fall into your hands!',0,6,0,1,NULL),
+(@TGUID+2,'The trickster Mage-Lord Urom protects the third ring. He will appear alone and defenseless, but do not be fooled by appearances! Urom is a powerful conjurer who commands a menagerie of Phantasmal creatures. Seek him out above.',0,0,0,1,NULL),
+(@TGUID+3,'Your greatest challenge lies ahead. Ley-Guardian Eregos is a Blue dragon of immense power. You will find him flying above the uppermost ring.',0,0,0,0,NULL),
+(@TGUID+4,'The full power of your drakes has been unlocked.  Use their power to defeat Eregos!',0,0,0,1,NULL);
 
 -- INSERT INTO `dbscript_random_templates` (`id`, `type`, `target_id`, `chance`, `comments`) VALUES

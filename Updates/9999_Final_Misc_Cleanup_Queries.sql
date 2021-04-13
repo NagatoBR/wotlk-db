@@ -67,7 +67,8 @@ UPDATE conditions SET comments=CONCAT('Has Minimum Rank Exalted With Faction ID:
 UPDATE conditions SET comments=CONCAT('Alliance Player') WHERE type=6 AND value1=469 AND comments IS NULL; -- CONDITION_TEAM
 UPDATE conditions SET comments=CONCAT('Horde Player') WHERE type=6 AND value1=67 AND comments IS NULL; -- CONDITION_TEAM
 UPDATE conditions SET comments=CONCAT('Has Skill ID ',value1,', Minimum Skill Value ',value2) WHERE type=7 AND comments IS NULL; -- CONDITION_SKILL
-UPDATE conditions SET comments=CONCAT('Quest ID ',value1,' Rewarded') WHERE type=8 AND comments IS NULL; -- CONDITION_QUESTREWARDED
+UPDATE conditions SET comments=CONCAT('Quest ID ',value1,' Rewarded') WHERE type=8 AND flags=0 AND comments IS NULL; -- CONDITION_QUEST_REWARDED
+UPDATE conditions SET comments=CONCAT('Quest ID ',value1,' NOT Rewarded') WHERE type=8 AND flags=1 AND comments IS NULL; -- CONDITION_QUEST_NOT_REWARDED
 UPDATE conditions SET comments=CONCAT('Quest ID ',value1,' Taken') WHERE type=9 AND value2=0 AND comments IS NULL; -- CONDITION_QUESTTAKEN
 UPDATE conditions SET comments=CONCAT('Quest ID ',value1,' Taken AND NOT Completed') WHERE type=9 AND value2=1 AND comments IS NULL; -- CONDITION_QUESTTAKEN
 UPDATE conditions SET comments=CONCAT('Quest ID ',value1,' Taken AND Completed') WHERE type=9 AND value2=2 AND comments IS NULL; -- CONDITION_QUESTTAKEN
@@ -93,7 +94,7 @@ UPDATE conditions SET comments=CONCAT('Quest ID ',value1,' NOT Taken AND NOT Rew
 UPDATE conditions SET comments=CONCAT('Player Has ',value2,' or more of Item ID ',value1,' in Inventory/Bank') WHERE type=23 AND flags=0 AND comments IS NULL; -- CONDITION_ITEM_WITH_BANK
 UPDATE conditions SET comments=CONCAT('Player Has Less Than ',value2,' of Item ID ',value1,' in Inventory/Bank') WHERE type=23 AND flags=1 AND comments IS NULL; -- CONDITION_NOITEM_WITH_BANK
 UPDATE conditions SET comments=CONCAT('Holiday ',value1,' Active') WHERE type=26 AND flags=0 AND comments IS NULL; -- CONDITION_ACTIVE_HOLIDAY
-UPDATE conditions SET comments=CONCAT('NOT Holiday ',value1,' Active') WHERE type=26 AND flags=1 AND comments IS NULL; -- CONDITION_NOT_ACTIVE_HOLIDAY
+UPDATE conditions SET comments=CONCAT('Holiday ',value1,' NOT Active') WHERE type=26 AND flags&1 AND comments IS NULL; -- CONDITION_ACTIVE_HOLIDAY &FLAG_REVERSE_RESULT
 UPDATE conditions SET comments=CONCAT('Player can learn Ability from Spell ID: ',value1) WHERE type=28 AND value2=0 AND comments IS NULL; -- CONDITION_LEARNABLE_ABILITY
 UPDATE conditions SET comments=CONCAT('(Player can learn Ability from Spell ID ',value1,' AND NOT has Item ID ',value2,' in Inventory or Bank)') WHERE type=28 AND value2 !=0 AND comments IS NULL; -- CONDITION_LEARNABLE_ABILITY
 UPDATE conditions SET comments=CONCAT('Skill level of Skill ID ',value1,' Below level ',value2) WHERE type=29 AND comments IS NULL; -- CONDITION_SKILL_BELOW
@@ -112,10 +113,10 @@ UPDATE conditions SET comments=CONCAT('Source of Condition''s Last Waypoint <= '
 UPDATE conditions SET comments=CONCAT('Source of Condition''s Last Waypoint >= ',value1) WHERE type=33 AND value2=2 AND comments IS NULL; -- CONDITION_LAST_WAYPOINT
 -- CONDITION_XP_USER
 UPDATE conditions SET comments=CONCAT('Player Gender: Male') WHERE type=35 AND value1=0 AND flags=0 AND comments IS NULL; -- CONDITION_GENDER
-UPDATE conditions SET comments=CONCAT('Player Gender: Femal') WHERE type=35 AND value1=1 AND flags=0 AND comments IS NULL; -- CONDITION_GENDER
+UPDATE conditions SET comments=CONCAT('Player Gender: Female') WHERE type=35 AND value1=1 AND flags=0 AND comments IS NULL; -- CONDITION_GENDER
 UPDATE conditions SET comments=CONCAT('Player Gender: None') WHERE type=35 AND value1=2 AND flags=0 AND comments IS NULL; -- CONDITION_GENDER
 UPDATE conditions SET comments=CONCAT('NPC Gender: Male') WHERE type=35 AND value1=0 AND flags=2 AND comments IS NULL; -- CONDITION_GENDER
-UPDATE conditions SET comments=CONCAT('NPC Gender: Femal') WHERE type=35 AND value1=1 AND flags=2 AND comments IS NULL; -- CONDITION_GENDER
+UPDATE conditions SET comments=CONCAT('NPC Gender: Female') WHERE type=35 AND value1=1 AND flags=2 AND comments IS NULL; -- CONDITION_GENDER
 UPDATE conditions SET comments=CONCAT('NPC Gender: None') WHERE type=35 AND value1=2 AND flags=2 AND comments IS NULL; -- CONDITION_GENDER
 UPDATE conditions SET comments=CONCAT('Player is Dead') WHERE type=36 AND value1=0 AND value2=0 AND comments IS NULL; -- CONDITION_DEAD_OR_AWAY
 UPDATE conditions SET comments=CONCAT('All Players in Group are Dead') WHERE type=36 AND value1=1 AND value2=0 AND comments IS NULL; -- CONDITION_DEAD_OR_AWAY
@@ -189,4 +190,28 @@ UPDATE conditions t, (SELECT DISTINCT condition_entry, comments FROM conditions)
    SET t.comments = CONCAT('(',t1.comments,' AND ',t2.comments,')')
  WHERE t.value1 = t1.condition_entry AND t.value2= t2.condition_entry AND t.comments IS NULL
    AND t.type = -1;
-
+  
+-- Backport Corrections  
+-- Classic -> WOTLK
+UPDATE dbscripts_on_creature_death SET datalong = 82 WHERE datalong = 147 AND command = 2;
+UPDATE dbscripts_on_event SET datalong = 82 WHERE datalong = 147 AND command = 2;
+UPDATE dbscripts_on_relay SET datalong = 82 WHERE datalong = 147 AND command = 2;
+UPDATE dbscripts_on_creature_movement SET datalong = 82 WHERE datalong = 147 AND command = 2;
+UPDATE dbscripts_on_quest_end SET datalong = 82 WHERE datalong = 147 AND command = 2;
+UPDATE dbscripts_on_quest_start SET datalong = 82 WHERE datalong = 147 AND command = 2;
+UPDATE dbscripts_on_spell SET datalong = 82 WHERE datalong = 147 AND command = 2;
+-- TBC -> WOTLK
+UPDATE dbscripts_on_creature_death SET datalong = 82 WHERE datalong = 168 AND command = 2;
+UPDATE dbscripts_on_event SET datalong = 82 WHERE datalong = 168 AND command = 2;
+UPDATE dbscripts_on_relay SET datalong = 82 WHERE datalong = 168 AND command = 2;
+UPDATE dbscripts_on_creature_movement SET datalong = 82 WHERE datalong = 168 AND command = 2;
+UPDATE dbscripts_on_quest_end SET datalong = 82 WHERE datalong = 168 AND command = 2;
+UPDATE dbscripts_on_quest_start SET datalong = 82 WHERE datalong = 168 AND command = 2;
+UPDATE dbscripts_on_spell SET datalong = 82 WHERE datalong = 168 AND command = 2;
+UPDATE dbscripts_on_creature_death SET datalong = 59 WHERE datalong = 46 AND command = 2;
+UPDATE dbscripts_on_event SET datalong = 59 WHERE datalong = 46 AND command = 2;
+UPDATE dbscripts_on_relay SET datalong = 59 WHERE datalong = 46 AND command = 2;
+UPDATE dbscripts_on_creature_movement SET datalong = 59 WHERE datalong = 46 AND command = 2;
+UPDATE dbscripts_on_quest_end SET datalong = 59 WHERE datalong = 46 AND command = 2;
+UPDATE dbscripts_on_quest_start SET datalong = 59 WHERE datalong = 46 AND command = 2;
+UPDATE dbscripts_on_spell SET datalong = 59 WHERE datalong = 46 AND command = 2;
